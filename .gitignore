@@ -1,5 +1,6 @@
-/dotfiles
+/bin
 /iso
 
 config.sh
 configure.sh
+/dotfiles/gitconfig

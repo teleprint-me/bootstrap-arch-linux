@@ -1,0 +1,73 @@
+!
+!! Colorscheme
+!
+
+! foreground/background
+! background rule affects transparency sfx
+! [n] where n represents opacity level in percent
+! #xxxxxx where xxxxxx represents bg color
+URxvt*background: [90]#000000
+URxvt*foreground: #FFFFFF
+
+! cursor
+URxvt*.cursorColor: #afbfbf
+
+! black
+URxvt*.color0  : #000000
+URxvt*.color8  : #404040
+! red
+URxvt*.color1  : #bb0000
+URxvt*.color9  : #db0000
+! green
+URxvt*.color2  : #02ad58
+URxvt*.color10 : #06e603
+! yellow
+URxvt*.color3  : #eedd22
+URxvt*.color11 : #ffff44
+! blue
+URxvt*.color4  : #0266bd
+URxvt*.color12 : #038fe0
+! magenta
+URxvt*.color5  : #c201b8
+URxvt*.color13 : #e001d9
+! cyan
+URxvt*.color6  : #44b3c2
+URxvt*.color14 : #5be7fa
+! white
+URxvt*.color7  : #AAAAAA
+URxvt*.color15 : #FFFFFF
+
+!
+!! URxvt Font
+!
+
+!! SourceCodePro
+URxvt*font: xft:SourceCodePro-Regular:pixelsize=14:antialias=true
+URxvt*boldFont: xft:SourceCodePro-Bold:pixelsize=14:antialias=true
+URxvt*italicFont: xft:SourceCodePro-It:pixelsize=14:antialias=true
+URxvt*boldItalicfont: xft:SourceCodePro-BoldIt:pixelsize=14:antialias=true
+
+!
+!! URxvt Appearance
+!
+
+URxvt*letterSpace: -1
+URxvt.lineSpace: 0
+! URxvt.geometry: 92x24
+URxvt.internalBorder: 5
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: true
+URxvt.scrollBar_right: true
+! scrollbar style - rxvt (default), plain (compact), NeXT, or xtermn
+URxvt.scrollstyle: plain
+URxvt.urgentOnBell: true
+! bit depth affects transparency sfx
+URxvt.depth: 32
+URxvt.iso14755: false
+
+! handle urls
+URxvt.urlLauncher: google-chrome
+URxvt.underlineURLs: true
+URxvt.urlButton: 3

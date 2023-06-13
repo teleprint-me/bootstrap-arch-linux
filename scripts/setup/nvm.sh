@@ -6,8 +6,8 @@ setup_nvm() {
         echo "nvm is already installed"
     else
         # Download and install nvm
-        if ! curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash; then
-            echo "Failed to install nvm"
+        if ! git clone https://github.com/nvm-sh/nvm.git ~/.nvm; then
+            echo "Failed to install nvm to ${HOME}/.nvm"
             exit 1
         fi
 
@@ -24,9 +24,11 @@ setup_nvm() {
     # Use installed Node.js version
     local node_version
     node_version="$(nvm ls --no-colors | grep '->' | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*')"
+    
     if [ -z "$node_version" ]; then
-        echo "Failed to find installed Node.js version"
+        echo "Failed to find installed Node.js using ${node_version}"
         exit 1
     fi
+
     nvm use "$node_version"
 }

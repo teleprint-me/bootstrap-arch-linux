@@ -6,4 +6,9 @@ install_fonts() {
         echo "Failed to install core system fonts"
         exit 1
     fi
+
+    if ! sudo cp -vi "dotfiles/etc/fonts/conf.d/50-noto-color-emoji.conf" "/etc/fonts/conf.d"; then
+        echo "Failed to install 50-noto-color-emoji.conf to /etc/fonts/conf.d"
+        exit 1
+    fi
 }

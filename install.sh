@@ -6,7 +6,7 @@ if [ $UID -eq 0 ]; then
     exit 1
 fi
 
-# Check if a file exists and is readable
+# Function to check if a file exists and is readable
 check_file() {
     if [ ! -f "$1" ] || [ ! -r "$1" ]; then
         echo "File $1 does not exist or is not readable. Exiting."
@@ -15,22 +15,26 @@ check_file() {
 }
 
 main() {
+    local source_tools="./scripts/tools"
+    local source_install="./scripts/install"
+    local source_setup="./scripts/setup"
     local scripts=(
-        "./scripts/tools/update.sh"
-        "./scripts/install/base.sh"
-        "./scripts/install/code.sh"
-        "./scripts/install/fonts.sh"
-        "./scripts/install/gnome.sh"
-        "./scripts/install/gpu.sh"
-        "./scripts/install/node.sh"
-        "./scripts/install/python.sh"
-        "./scripts/setup/neovim.sh"
-        "./scripts/setup/nvm.sh"
-        "./scripts/setup/steam.sh"
-        "./scripts/setup/tmux.sh"
-        "./scripts/setup/ufw.sh"
-        "./scripts/setup/yay.sh"
-        "./scripts/setup/zsh.sh"
+        "${source_tools}/update.sh"
+        "${source_tools}/confirm.sh"
+        "${source_install}/base.sh"
+        "${source_install}/code.sh"
+        "${source_install}/fonts.sh"
+        "${source_install}/gnome.sh"
+        "${source_install}/gpu.sh"
+        "${source_install}/node.sh"
+        "${source_install}/python.sh"
+        "${source_setup}/neovim.sh"
+        "${source_setup}/nvm.sh"
+        "${source_setup}/steam.sh"
+        "${source_setup}/tmux.sh"
+        "${source_setup}/ufw.sh"
+        "${source_setup}/yay.sh"
+        "${source_setup}/zsh.sh"
     )
 
     # Source install scripts
@@ -42,79 +46,80 @@ main() {
     echo "Please select an option:"
 
     local options=(
-        "update"
-        "base"
-        "fonts"
-        "python"
-        "ufw"
-        "yay"
-        "node"
-        "nvm"
-        "zsh"
-        "tmux"
-        "neovim"
-        "intel"
-        "nvidia"
-        "amd"
-        "gnome"
-        "code"
-        "steam"
+        "update: Update the base system"
+        "base: Install C, C++, Rust, Lua, and base development tools"
+        "fonts: Install Adobe, Nerd, and Noto fonts"
+        "python: Install core python development packages"
+        "ufw: Install and setup Uncomplicated Firewall"
+        "yay: Install and setup AUR package manager"
+        "node: Install Node.js"
+        "nvm: Install and setup Node Version Manager"
+        "zsh: Install and setup Zsh installation"
+        "tmux: Install and setup Tmux installation"
+        "neovim: Install and setup NeoVim text editor"
+        "intel: Install Intel GPU drivers, OpenCL, and Vulkan"
+        "nvidia: Install Nvidia GPU drivers, OpenCL, Vulkan, and CUDA"
+        "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm"
+        "gnome: Install Gnome desktop environment and shell extensions"
+        "code: Install Visual Studio Code text editor"
+        "steam: Install Steam gaming platform"
+        "quit: Exit the script"
     )
     
     select option in "${options[@]}"; do
         case $option in
-            "update")
-                update_system
+            "update: Update the base system")
+                confirm_proceed "base system update" && pacman_system_update
                 ;;
-            "base")
-                install_base
+            "base: Install C, C++, Rust, Lua, and base development tools")
+                confirm_proceed "base system" && install_base
                 ;;
-            "fonts")
-                install_fonts
+            "fonts: Install Adobe, Nerd, and Noto fonts")
+                confirm_proceed "fonts" && install_fonts
                 ;;
-            "python")
-                install_python
+            "python: Install core python development packages")
+                confirm_proceed "Python" && install_python
                 ;;
-            "ufw")
-                setup_ufw
+            "ufw: Install and setup Uncomplicated Firewall")
+                confirm_proceed "UFW" && setup_ufw
                 ;;
-            "yay")
-                setup_yay
+            "yay: Install and setup AUR package manager")
+                confirm_proceed "Yay" && setup_yay
                 ;;
-            "nvm")
-                setup_nvm
+            "node: Install Node.js")
+                confirm_proceed "Node.js" && install_nodejs
                 ;;
-            "node")
-                install_nodejs
+            "nvm: Install and setup Node Version Manager")
+                confirm_proceed "Node Version Manager" && setup_nvm
                 ;;
-            "zsh")
-                setup_zsh
+            "zsh: Install and setup Zsh installation")
+                confirm_proceed "Zsh" && setup_zsh
                 ;;
-            "tmux")
-                setup_tmux
+            "tmux: Install and setup Tmux installation")
+                confirm_proceed "Tmux" && setup_tmux
                 ;;
-            "neovim")
-                install_neovim
+            "neovim: Install and setup NeoVim text editor")
+                setup_neovim
                 ;;
-            "intel")
-                install_intel
+            "intel: Install Intel GPU drivers, OpenCL, and Vulkan")
+                confirm_proceed "Intel drivers" && install_intel
                 ;;
-            "nvidia")
-                install_nvidia
+            "nvidia: Install Nvidia GPU drivers, OpenCL, Vulkan, and CUDA")
+                confirm_proceed "Nvidia drivers" && install_nvidia
                 ;;
-            "amd")
-                install_amd
+            "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm")
+                confirm_proceed "AMD drivers" && install_amd
                 ;;
-            "gnome")
-                install_gnome
+            "gnome: Install Gnome desktop environment and shell extensions")
+                confirm_proceed "Gnome desktop and shell extensions" && install_gnome
                 ;;
-            "code")
-                install_vscode
+            "code: Install Visual Studio Code text editor")
+                confirm_proceed "Visual Studio Code" && install_vscode
                 ;;
-            "steam")
-                install_steam
+            "steam: Install Steam gaming platform")
+                confirm_proceed "Steam" && install_steam
                 ;;
-            "quit")
+            "quit: Exit the script")
                 break
                 ;;
             *)

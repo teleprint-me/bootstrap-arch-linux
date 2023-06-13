@@ -3,6 +3,7 @@
 setup_zsh() {
     local zpath=/usr/share/zsh/plugins
     local ohmyz=/usr/share/oh-my-zsh/custom/plugins
+    local ztheme=/usr/share/oh-my-zsh/themes
 
     # Install zsh and plugins
     if ! yay -S zsh antigen-git oh-my-zsh-git zsh-autosuggestions-git zsh-syntax-highlighting-git zsh-completions-git; then
@@ -11,7 +12,7 @@ setup_zsh() {
     fi
 
     # Clone zsh-completions repository
-    if ! git clone "https://github.com/zsh-users/zsh-completions.git" "${zpath}/zsh-completions"; then
+    if ! sudo git clone "https://github.com/zsh-users/zsh-completions.git" "${zpath}/zsh-completions"; then
         echo "Failed to clone zsh-completions repository"
         exit 1
     fi
@@ -35,6 +36,16 @@ setup_zsh() {
     fi
     if ! sudo ln -sv "${zpath}/zsh-completions" "${ohmyz}/zsh-completions"; then
         echo "Failed to create symbolic link for zsh-completions"
+        exit 1
+    fi
+
+    if ! sudo cp -vi dotfiles/usr/share/oh-my-zsh/themes/lambda-o.zsh-theme "${ztheme}/lambda-o.zsh-theme"; then
+        echo "Failed to copy lambda-o.zsh-theme to ${ztheme}"
+        exit 1
+    fi
+
+    if ! cp -vi dotfiles/zshrc "${HOME}/.zshrc"; then
+        echo "Failed to copy .zshrc to ${HOME}"
         exit 1
     fi
 

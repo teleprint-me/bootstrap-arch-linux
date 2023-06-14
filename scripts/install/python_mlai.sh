@@ -25,7 +25,7 @@ install_python_mlai_dependencies() {
     # NOTE: Do NOT use the AUR here!!! Use official packages only!!!
     # Doing otherwise will create a dependency cycle, which will lead to broken
     # builds, which will lead to a mangled system setup.
-    if ! sudo pacman -S python-dotenv python-dateutil python-pytz python-iso8601 python-requests pyopencl-headers python-pyopencl python-numpy python-matplotlib python-nltk python-scikit-learn python-pdfminer --noconfirm; then
+    if ! sudo pacman -S bpython python-dotenv python-dateutil python-pytz python-iso8601 python-requests python-requests-mock pyopencl-headers python-pyopencl python-numpy python-matplotlib python-nltk python-scikit-learn python-pdfminer --noconfirm; then
         echo "pacman: Failed to install Python OpenCL, ML, and AI libraries"
         exit 1
     fi
@@ -42,7 +42,7 @@ install_python_mlai_extensions() {
     fi
 
     # Install dev dependencies
-    if ! pip install --user --break-system-packages bpython mkdocs requests-mock; then
+    if ! pip install --user --break-system-packages mkdocs; then
         echo "pipx: Failed to install python development dependencies"
         exit 1
     fi

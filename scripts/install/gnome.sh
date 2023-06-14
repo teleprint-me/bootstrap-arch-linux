@@ -5,7 +5,7 @@ source ./scripts/tools/confirm.sh
 function install_gnome_desktop() {
     confirm_proceed "gnome-desktop: Install Gnome desktop environment" || return
 
-    if ! pacman -S gnome-desktop --noconfirm; then
+    if ! sudo pacman -S gnome-desktop --noconfirm; then
         echo "Failed to install Gnome desktop environment"
         exit 1
     fi

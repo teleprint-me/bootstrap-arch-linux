@@ -73,8 +73,7 @@ install_nvidia() {
     install_opencl
     install_nvidia_vulkan
     install_nvidia_cuda
-    install_python_mlai
-    install_python_pytorch_cuda_extension
+    install_python_mlai_cuda
 }
 
 install_amd() {
@@ -83,6 +82,5 @@ install_amd() {
     install_opencl
     install_amd_vulkan
     install_amd_rocm
-    install_python_mlai
-    install_python_pytorch_rocm_extension
+    install_python_mlai_rocm
 }

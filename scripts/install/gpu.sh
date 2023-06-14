@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source ./scripts/install/python.sh
+source ./scripts/tools/confirm.sh
+source ./scripts/install/python_mlai.sh
 
 # Function to install OpenCL
 install_opencl() {
@@ -26,7 +27,6 @@ install_intel_opencl() {
 }
 
 install_nvidia_vulkan() {
-    # TODO
     if ! sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader vkd3d lib32-vkd3d vulkan-headers vulkan-validation-layers vulkan-tools --noconfirm; then
         echo "Failed to install Nvidia Vulkan driver support"
         exit 1
@@ -59,6 +59,8 @@ install_amd_rocm() {
 }
 
 install_intel() {
+    confirm_proceed "intel: Install Intel GPU drivers, OpenCL, and Vulkan" || return
+
     install_opencl
     install_intel_opencl
     install_intel_vulkan
@@ -66,6 +68,8 @@ install_intel() {
 }
 
 install_nvidia() {
+    confirm_proceed "nvidia: Install Nvidia GPU drivers, OpenCL, Vulkan, and CUDA" || return
+    
     install_opencl
     install_nvidia_vulkan
     install_nvidia_cuda
@@ -74,6 +78,8 @@ install_nvidia() {
 }
 
 install_amd() {
+    confirm_proceed "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm" || return
+
     install_opencl
     install_amd_vulkan
     install_amd_rocm

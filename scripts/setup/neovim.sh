@@ -12,11 +12,11 @@ git_clone_neovim_python() {
 }
 
 setup_neovim() {
+    confirm_proceed "Install and setup NeoVim text editor" || return
+
     local cwd="${PWD}"
     local config_nvim="${HOME}/.config/nvim"
     local config_custom="${HOME}/.config/nvim/lua/custom"
-
-    confirm_proceed "Neovim setup" || return
 
     # Remove old neovim cache and backup directories
     if ! rm -rfv "${HOME}/.cache/nvim" "${HOME}/.local/share/nvim" "${HOME}/.config/nvim.backup"; then
@@ -57,7 +57,7 @@ setup_neovim() {
     # Prevents "fatal: destination path" from occurring with neovim-python install
     if ! mv -fv "${config_custom}" "${config_custom}.backup"; then
         echo "Failed to backup neovims custom lua path"
-        exit 1
+        return 1
     fi
 
     # Configure and setup neovim to handle python out of the box

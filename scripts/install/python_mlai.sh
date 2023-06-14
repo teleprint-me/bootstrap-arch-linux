@@ -43,7 +43,7 @@ install_python_mlai_extensions() {
 
     # Install dev dependencies
     if ! pip install --user --break-system-packages mkdocs; then
-        echo "pipx: Failed to install python development dependencies"
+        echo "pip: Failed to install python development dependencies"
         exit 1
     fi
 }
@@ -51,7 +51,7 @@ install_python_mlai_extensions() {
 install_python_pytorch_cuda_extension() {
     # Install bitsandbytes
     if ! pip install --user --break-system-packages bitsandbytes; then
-        echo "pipx: Failed to install bitsandbytes package"
+        echo "pip: Failed to install bitsandbytes package"
         exit 1
     fi
 }
@@ -59,7 +59,7 @@ install_python_pytorch_cuda_extension() {
 install_python_pytorch_rocm_extension() {
     # Install bitsandbytes with ROCm support
     if ! pip install --user --break-system-packages "git+https://github.com/broncotc/bitsandbytes-rocm@1b52f4243f94cd1b81dd1cad5a9465d9d7add858"; then
-        echo "pipx: Failed to install bitsandbytes-rocm package"
+        echo "pip: Failed to install bitsandbytes-rocm package"
         exit 1
     fi
 }

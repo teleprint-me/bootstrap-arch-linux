@@ -33,7 +33,7 @@ setup_neovim() {
     fi
 
     # Install neovim and plugins
-    if ! yay -S neovim pyright python-pynvim neovim-plug; then
+    if ! yay -S neovim neovim-plug xclip pyright python-pynvim; then
         echo "Failed to install neovim and plugins"
         return 1
     fi

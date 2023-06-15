@@ -26,6 +26,7 @@ main() {
         "${source_install}/gnome.sh"
         "${source_install}/gpu.sh"
         "${source_install}/python_mlai.sh"
+        "${source_install}/chrome.sh"
         "${source_install}/steam.sh"
         "${source_setup}/neovim.sh"
         "${source_setup}/nvm.sh"
@@ -55,6 +56,7 @@ main() {
         "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm"
         "gnome: Install Gnome desktop environment and shell extensions"
         "code: Install Visual Studio Code text editor"
+        "chrome: Install Google Chrome web browser"
         "steam: Install Steam gaming platform"
         "quit: Exit the script"
     )
@@ -96,6 +98,9 @@ main() {
                 ;;
             "code: Install Visual Studio Code text editor")
                 install_vscode
+                ;;
+            "chrome: Install Google Chrome web browser")
+                install_google_chrome
                 ;;
             "steam: Install Steam gaming platform")
                 install_steam

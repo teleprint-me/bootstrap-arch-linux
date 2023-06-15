@@ -6,7 +6,7 @@ source ./scripts/tools/confirm.sh
 install_base_dev() {
     confirm_proceed "base-dev: Install C, C++, Rust, Lua, Node, and base development tools" || return
 
-    if ! sudo pacman -S base-devel llvm clang rust gdb make cmake ninja lua nodejs aspell hunspell shellcheck mlocate htop nmap curl wget openssl openssh gnupg imagemagick ffmpegthumbs ffmpegthumbnailer tree --noconfirm; then
+    if ! sudo pacman -S base-devel llvm clang rust gdb make cmake ninja lua nodejs aspell hunspell shellcheck mlocate tree htop nmap curl wget openssl openssh gnupg imagemagick ffmpegthumbs ffmpegthumbnailer xclip wl-clipboard --noconfirm; then
         echo "Failed to install core system packages"
         exit 1
     fi
@@ -49,6 +49,10 @@ install_base_dev_firewall() {
         fi
     fi
 
+    if ! sudo systemctl enable ufw; then
+        echo "Failed to enable ufw using systemd"
+    fi
+
     # Enable ufw
     if ! sudo ufw enable; then
         echo "Failed to enable ufw"
@@ -79,6 +83,10 @@ install_base_dev_firewall() {
             return 1
         fi
     done
+
+    if ! sudo systemctl start ufw; then
+        echo "Failed to start ufw using systemd"
+    fi
 
     # Reload ufw
     if ! sudo ufw reload; then

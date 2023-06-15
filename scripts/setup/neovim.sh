@@ -12,7 +12,7 @@ git_clone_neovim_python() {
 }
 
 setup_neovim() {
-    confirm_proceed "Install and setup NeoVim text editor" || return
+    confirm_proceed "NeoVim, NvChad, and NeoVim-Python" || return
 
     local cwd="${PWD}"
     local config_nvim="${HOME}/.config/nvim"
@@ -33,7 +33,7 @@ setup_neovim() {
     fi
 
     # Install neovim and plugins
-    if ! yay -S neovim neovim-plug xclip pyright python-pynvim; then
+    if ! yay -S neovim neovim-plug pyright python-pynvim; then
         echo "Failed to install neovim and plugins"
         return 1
     fi

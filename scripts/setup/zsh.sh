@@ -3,7 +3,7 @@
 source ./scripts/tools/confirm.sh
 
 setup_zsh() {
-    confirm_proceed "zsh: Install and setup Zsh installation" || return
+    confirm_proceed "Zsh" || return
 
     local zpath=/usr/share/zsh/plugins
     local ohmyz=/usr/share/oh-my-zsh/custom/plugins

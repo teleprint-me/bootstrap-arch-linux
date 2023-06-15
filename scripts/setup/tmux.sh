@@ -3,7 +3,7 @@
 source ./scripts/tools/confirm.sh
 
 setup_tmux() {
-    confirm_proceed "tmux: Install and setup Tmux installation" || return
+    confirm_proceed "Tmux" || return
 
     # Install tmux
     if ! sudo pacman -S tmux --noconfirm; then

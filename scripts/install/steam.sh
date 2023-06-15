@@ -4,7 +4,7 @@ source ./scripts/tools/confirm.sh
 
 # Function to install steam
 install_steam() {
-    confirm_proceed "Install Steam and Steam Play dependencies" || return
+    confirm_proceed "Steam and Steam Play dependencies" || return
 
     if ! yay -S steam steam-native-runtime wine winetricks protontricks-git proton-ge-custom-bin xboxdrv --noconfirm; then
         echo "Failed to install Steam"

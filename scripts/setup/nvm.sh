@@ -8,7 +8,7 @@ git_clone_nvm() {
 }
 
 setup_nvm() {
-    confirm_proceed "nvm: Install and setup Node Version Manager" || return
+    confirm_proceed "Node Version Manager" || return
 
     # Check if nvm is already installed
     if command -v nvm &> /dev/null; then

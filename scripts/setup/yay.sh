@@ -3,7 +3,7 @@
 source ./scripts/tools/confirm.sh
 
 setup_yay() {
-    confirm_proceed "yay: Install and setup AUR package manager" || return
+    confirm_proceed "Yay" || return
 
     # Check if yay is already installed
     if command -v yay &> /dev/null; then

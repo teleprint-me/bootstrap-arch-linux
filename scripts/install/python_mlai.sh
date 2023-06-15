@@ -36,14 +36,21 @@ install_python_mlai_extensions() {
     # and transformers from a system install to a user install to prevent mangling
     # system packages.
     # Install python dependencies
-    if ! pip install --user --break-system-packages sentencepiece sentence-transformers transformers huggingface-hub tiktoken chromadb langchain; then
-        echo "pipx: Failed to install python library extensions"
+    if ! pip install --user --break-system-packages sentencepiece sentence-transformers transformers huggingface-hub InstructorEmbedding tiktoken chromadb langchain; then
+        echo "pip: Failed to install python library extensions"
         exit 1
     fi
 
     # Install dev dependencies
     if ! pip install --user --break-system-packages mkdocs; then
         echo "pip: Failed to install python development dependencies"
+        exit 1
+    fi
+}
+
+install_python_pytorch_cpu_extensions() {
+    if ! pip install --user --break-system-packages accelerate xformers faiss-cpu; then
+        echo "pip: Failed to install pytorch development extensions"
         exit 1
     fi
 }
@@ -67,6 +74,7 @@ install_python_pytorch_rocm_extension() {
 install_python_mlai() {
     install_python_mlai_dependencies
     install_python_mlai_extensions
+    install_python_pytorch_cpu_extensions
 }
 
 install_python_mlai_cuda() {

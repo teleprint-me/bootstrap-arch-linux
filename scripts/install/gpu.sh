@@ -35,7 +35,7 @@ install_nvidia_vulkan() {
 
 # Function to install Nvidia CUDA
 install_nvidia_cuda() {
-    if ! sudo pacman -S nccl opencl-nvidia lib32-opencl-nvidia cuda cudnn cuda-tools opencv-cuda tensorflow-cuda tensorflow-opt-cuda python-cuda python-cuda-docs python-pytorch-cuda python-pytorch-opt-cuda python-tensorflow-cuda python-tensorflow-opt-cuda python-torchvision-cuda --noconfirm; then
+    if ! sudo pacman -S cuda cudnn cuda-tools opencv-cuda opencl-nvidia lib32-opencl-nvidia tensorflow-cuda tensorflow-opt-cuda nccl python-cuda python-cuda-docs python-pytorch-cuda python-pytorch-opt-cuda python-tensorflow-cuda python-tensorflow-opt-cuda python-torchvision-cuda --noconfirm; then
         echo "Failed to install Nvidia CUDA"
         exit 1
     fi
@@ -52,14 +52,14 @@ install_amd_vulkan() {
 
 # Function to install AMD ROCm
 install_amd_rocm() {
-    if ! sudo pacman -S opencl-mesa lib32-opencl-mesa rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse python-pytorch-rocm python-pytorch-opt-rocm --noconfirm; then
+    if ! sudo pacman -S opencl-mesa lib32-opencl-mesa rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse rccl python-pytorch-rocm python-pytorch-opt-rocm --noconfirm; then
         echo "Failed to install AMD ROCm"
         exit 1
     fi
 }
 
 install_intel() {
-    confirm_proceed "intel: Install Intel GPU drivers, OpenCL, and Vulkan" || return
+    confirm_proceed "Intel GPU drivers, OpenCL, and Vulkan" || return
 
     install_opencl
     install_intel_opencl
@@ -68,7 +68,7 @@ install_intel() {
 }
 
 install_nvidia() {
-    confirm_proceed "nvidia: Install Nvidia GPU drivers, OpenCL, Vulkan, and CUDA" || return
+    confirm_proceed "Nvidia GPU drivers, OpenCL, Vulkan, and CUDA" || return
     
     install_opencl
     install_nvidia_vulkan
@@ -77,7 +77,7 @@ install_nvidia() {
 }
 
 install_amd() {
-    confirm_proceed "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm" || return
+    confirm_proceed "AMD GPU drivers, OpenCL, Vulkan, and ROCm" || return
 
     install_opencl
     install_amd_vulkan

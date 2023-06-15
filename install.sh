@@ -57,6 +57,7 @@ main() {
         "gnome: Install Gnome desktop environment and shell extensions"
         "code: Install Visual Studio Code text editor"
         "chrome: Install Google Chrome web browser"
+        "spotify: Install Spotify music streaming client"
         "steam: Install Steam gaming platform"
         "quit: Exit the script"
     )
@@ -100,6 +101,9 @@ main() {
                 install_vscode
                 ;;
             "chrome: Install Google Chrome web browser")
+                install_google_chrome
+                ;;
+            "spotify: Install Spotify music streaming client")
                 install_google_chrome
                 ;;
             "steam: Install Steam gaming platform")

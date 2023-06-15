@@ -104,7 +104,7 @@ main() {
                 install_google_chrome
                 ;;
             "spotify: Install Spotify music streaming client")
-                install_google_chrome
+                install_spotify
                 ;;
             "steam: Install Steam gaming platform")
                 install_steam

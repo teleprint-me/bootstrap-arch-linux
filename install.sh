@@ -26,6 +26,7 @@ main() {
         "${source_install}/gnome.sh"
         "${source_install}/gpu.sh"
         "${source_install}/python_mlai.sh"
+        "${source_install}/python_poetry.sh"
         "${source_install}/chrome.sh"
         "${source_install}/steam.sh"
         "${source_setup}/neovim.sh"
@@ -50,7 +51,7 @@ main() {
         "zsh: Install and setup Zsh installation"
         "tmux: Install and setup Tmux installation"
         "neovim: Install and setup NeoVim text editor"
-        "nvm: Install and setup Node Version Manager"
+        "poetry: Install and configure Poetry virtual environment"
         "intel: Install Intel GPU drivers, OpenCL, and Vulkan"
         "nvidia: Install Nvidia GPU drivers, OpenCL, Vulkan, and CUDA"
         "amd: Install AMD GPU drivers, OpenCL, Vulkan, and ROCm"
@@ -59,6 +60,7 @@ main() {
         "chrome: Install Google Chrome web browser"
         "spotify: Install Spotify music streaming client"
         "steam: Install Steam gaming platform"
+        "nvm: Install and setup Node Version Manager"
         "quit: Exit the script"
     )
 
@@ -82,8 +84,8 @@ main() {
             "neovim: Install and setup NeoVim text editor")
                 setup_neovim
                 ;;
-            "nvm: Install and setup Node Version Manager")
-                setup_nvm
+            "poetry: Install and configure Poetry virtual environment")
+                install_python_poetry
                 ;;
             "intel: Install Intel GPU drivers, OpenCL, and Vulkan")
                 install_intel
@@ -108,6 +110,9 @@ main() {
                 ;;
             "steam: Install Steam gaming platform")
                 install_steam
+                ;;
+            "nvm: Install and setup Node Version Manager")
+                setup_nvm
                 ;;
             "quit: Exit the script")
                 break

@@ -43,6 +43,7 @@ main() {
     done
 
     echo "Please select an option:"
+    echo "Press enter on an empty line to redisplay the options."
 
     local options=(
         "update: Update the base system"
@@ -60,6 +61,7 @@ main() {
         "chrome: Install Google Chrome web browser"
         "spotify: Install Spotify music streaming client"
         "steam: Install Steam gaming platform"
+        "xboxdrv: Install input controller device support"
         "nvm: Install and setup Node Version Manager"
         "quit: Exit the script"
     )
@@ -110,6 +112,9 @@ main() {
                 ;;
             "steam: Install Steam gaming platform")
                 install_steam
+                ;;
+            "xboxdrv: Install input controller device support")
+                install_xboxdrv
                 ;;
             "nvm: Install and setup Node Version Manager")
                 setup_nvm

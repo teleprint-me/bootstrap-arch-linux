@@ -36,4 +36,6 @@ setup_nvm() {
     fi
 
     nvm use "$node_version"
+
+    echo "Nvm setup completed successfully"
 }

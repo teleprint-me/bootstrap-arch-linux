@@ -59,5 +59,5 @@ setup_zsh() {
         return 1
     fi
 
-    echo "zsh installation completed successfully"
+    echo "Zsh installation completed successfully"
 }

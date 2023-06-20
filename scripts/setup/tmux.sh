@@ -26,5 +26,7 @@ setup_tmux() {
         return 1
     fi
 
-    echo "tmux setup completed successfully"
+    echo "Tmux setup completed successfully"
+    echo "Source tmux.conf: tmux source-file ~/.tmux.conf "
+    echo "Install plugins: prefix + I (capital \"i\")"
 }

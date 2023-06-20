@@ -31,4 +31,6 @@ setup_yay() {
 
     # Remove the yay directory
     rm -rf yay
+
+    echo "Yay setup completed successfully"
 }

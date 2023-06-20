@@ -4,7 +4,7 @@ source ./scripts/tools/confirm.sh
 
 # Function to install C, C++, Rust, Lua, and Base development tools
 install_base_dev() {
-    confirm_proceed "base-dev: Install C, C++, Rust, Lua, Node, and base development tools" || return
+    confirm_proceed "C, C++, Rust, Lua, Node, and Base Development Tools" || return
 
     if ! sudo pacman -S base-devel llvm clang rust gdb make cmake ninja lua nodejs aspell hunspell shellcheck mlocate tree htop nmap curl wget openssl openssh gnupg imagemagick ffmpegthumbs ffmpegthumbnailer xclip wl-clipboard --noconfirm; then
         echo "Failed to install core system packages"
@@ -14,7 +14,7 @@ install_base_dev() {
 
 # Function to install Python development tools
 install_base_dev_python() {
-    confirm_proceed "base-dev-python: Install core python development packages" || return
+    confirm_proceed "Core Python Development Packages" || return
 
     if ! sudo pacman -S python-pip python-pytest python-pipx python-virtualenv python-isort python-black flake8 ruff mypy --noconfirm; then
         echo "Failed to install python development packages"
@@ -24,7 +24,7 @@ install_base_dev_python() {
 
 # Function to install fonts
 install_base_dev_fonts() {
-    confirm_proceed "base-dev-fonts: Install Adobe, Nerd, and Noto fonts" || return
+    confirm_proceed "Adobe, Nerd, and Noto fonts" || return
 
     if ! sudo pacman -S adobe-source-code-pro-fonts ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-extra noto-fonts-emoji ttf-noto-nerd --noconfirm; then
         echo "Failed to install core system fonts"
@@ -39,7 +39,7 @@ install_base_dev_fonts() {
 
 # Function to setup firewall rules
 install_base_dev_firewall() {
-    confirm_proceed "base-dev-firewall: Install and setup UFW" || return
+    confirm_proceed "UFW" || return
 
     # Install ufw if it's not already installed
     if ! command -v ufw &> /dev/null; then

@@ -55,7 +55,7 @@ install_python_pytorch_cpu_extensions() {
     fi
 }
 
-install_python_pytorch_cuda_extension() {
+install_python_pytorch_cuda_extensions() {
     # Install bitsandbytes
     if ! pip install --user --break-system-packages bitsandbytes; then
         echo "pip: Failed to install bitsandbytes package"
@@ -63,7 +63,7 @@ install_python_pytorch_cuda_extension() {
     fi
 }
 
-install_python_pytorch_rocm_extension() {
+install_python_pytorch_rocm_extensions() {
     # Install bitsandbytes with ROCm support
     if ! pip install --user --break-system-packages "git+https://github.com/broncotc/bitsandbytes-rocm@1b52f4243f94cd1b81dd1cad5a9465d9d7add858"; then
         echo "pip: Failed to install bitsandbytes-rocm package"
@@ -79,10 +79,10 @@ install_python_mlai() {
 
 install_python_mlai_cuda() {
     install_python_mlai
-    install_python_pytorch_cuda_extension
+    install_python_pytorch_cuda_extensions
 }
 
 install_python_mlai_rocm() {
     install_python_mlai
-    install_python_pytorch_rocm_extension
+    install_python_pytorch_rocm_extensions
 }

@@ -19,9 +19,6 @@ function git_prompt_custom {
     if [[ "$(git status --porcelain 2>/dev/null)" != "" ]]; then
         # Changes detected, color branch name red
         branch_prefix="%{$fg[red]%}Δ%{$reset_color%}"
-    elif [[ "$(git log --oneline origin/$branch..HEAD 2>/dev/null)" == "" ]]; then
-        # The branch is at the initial commit
-        branch_prefix="%{$fg[yellow]%}ι%{$reset_color%}"
     elif git status | grep 'renamed:' &>/dev/null; then
         # The branch is being renamed
         branch_prefix="%{$fg[yellow]%}ρ%{$reset_color%}"

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+# scripts/install/code.sh
 
 source ./scripts/tools/confirm.sh
+source ./scripts/tools/command.sh
 
 # Developer Notes: 
 
@@ -59,10 +61,7 @@ reset_text_mime_types() {
 
 reset_vscode_mime_types() {
     # Check if xdg-mime exists
-    if ! command -v xdg-mime &> /dev/null; then
-        echo "xdg-mime could not be found. Aborting."
-        return 1
-    fi
+    check_command "xdg-mime" || return 1
 
     reset_inode_mime_types
     reset_text_mime_types
@@ -76,7 +75,7 @@ install_vscode() {
         return 1
     fi
 
-    reset_vscode_mime_types
+    reset_vscode_mime_types || return 1
 
     echo "Visual Studio Code installed successfully"
 }

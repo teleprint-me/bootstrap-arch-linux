@@ -8,7 +8,7 @@ install_base_dev() {
 
     if ! sudo pacman -S base-devel llvm clang rust gdb make cmake ninja lua nodejs aspell hunspell shellcheck mlocate tree htop nmap curl wget openssl openssh gnupg imagemagick ffmpegthumbs ffmpegthumbnailer xclip wl-clipboard --noconfirm; then
         echo "Failed to install core system packages"
-        exit 1
+        return 1
     fi
 }
 
@@ -18,7 +18,7 @@ install_base_dev_python() {
 
     if ! sudo pacman -S python-pip python-pytest python-pipx python-virtualenv python-isort python-black flake8 ruff mypy --noconfirm; then
         echo "Failed to install python development packages"
-        exit 1
+        return 1
     fi
 }
 
@@ -28,12 +28,12 @@ install_base_dev_fonts() {
 
     if ! sudo pacman -S adobe-source-code-pro-fonts ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-extra noto-fonts-emoji ttf-noto-nerd --noconfirm; then
         echo "Failed to install core system fonts"
-        exit 1
+        return 1
     fi
 
     if ! sudo cp -vi "dotfiles/etc/fonts/conf.d/50-noto-color-emoji.conf" "/etc/fonts/conf.d"; then
         echo "Failed to install 50-noto-color-emoji.conf to /etc/fonts/conf.d"
-        exit 1
+        return 1
     fi
 }
 
@@ -45,7 +45,7 @@ install_base_dev_firewall() {
     if ! command -v ufw &> /dev/null; then
         if ! sudo pacman -S ufw ufw-extras --noconfirm; then
             echo "Failed to install ufw"
-            exit 1
+            return 1
         fi
     fi
 
@@ -56,7 +56,7 @@ install_base_dev_firewall() {
     # Enable ufw
     if ! sudo ufw enable; then
         echo "Failed to enable ufw"
-        exit 1
+        return 1
     fi
 
     # Define an array of firewall rules

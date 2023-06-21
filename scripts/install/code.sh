@@ -6,21 +6,20 @@ source ./scripts/tools/command.sh
 
 # Developer Notes: 
 
-# VSCode does NOT respect the users environmental mime-types and modifies them.
+# VSCode does not respect the user's environmental MIME types and modifies them.
 
-# This has undesirable and adverse side-effects as a result.
+# This can lead to undesirable and adverse side effects.
 
 # Functions are included here to mitigate these issues.
 
-# TODO: Come up with a better way of handling variable environments along with mime types for differing environments.
-# Handling the defaults like this is fine for now, but will become an annoyance in the future.
+# TODO: Identify an improved approach to manage variable desktop environments and MIME types for different scenarios.
+# The current method of handling defaults is adequate at present, but it may pose challenges in the future.
 
-# NOTE: Modify these env variables to suite your environment or clear them to enable prompting.
-# DEFAULT_FILE_MANAGER="org.kde.dolphin.desktop" for dolphin on KDE
+# NOTE: Modify these environment variables to suit your needs or clear them to enable prompting.
+# Example: DEFAULT_FILE_MANAGER="org.kde.dolphin.desktop" for Dolphin on KDE
 DEFAULT_FILE_MANAGER="org.gnome.Nautilus.desktop"
-# NOTE: A lighter weight text editor is preferred in most cases which is why vscode is overridden.
-# DEFAULT_TEXT_EDITOR="kate.desktop" for KDE
-# DEFAULT_TEXT_EDITOR="code.desktop" for VSCode
+# Example: DEFAULT_TEXT_EDITOR="kate.desktop" for Kate on KDE
+# Example: DEFAULT_TEXT_EDITOR="code.desktop" for Visual Studio Code
 DEFAULT_TEXT_EDITOR="nvim.desktop"
 
 reset_inode_mime_types() {

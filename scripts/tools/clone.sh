@@ -12,7 +12,7 @@ git_clone_repo() {
         # Clone the repository
         if ! git clone "${repo_url}" "${target_dir}"; then
             echo "Failed to clone ${repo_url}"
-            exit 1
+            return 1
         fi
         echo "Successfully cloned ${repo_url}"
     fi

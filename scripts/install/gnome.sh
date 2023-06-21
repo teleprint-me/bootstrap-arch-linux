@@ -12,7 +12,7 @@ install_gnome_desktop() {
 
     if ! sudo pacman -S gnome-desktop --noconfirm; then
         echo "Failed to install Gnome desktop environment"
-        exit 1
+        return 1
     fi
 }
 
@@ -21,7 +21,7 @@ install_gnome_extensions() {
 
     if ! yay -S gnome-shell-extensions gnome-browser-connector gnome-shell-extension-arc-menu gnome-shell-extension-appindicator gnome-shell-extension-material-shell gnome-tweaks --noconfirm; then
         echo "Failed to install Gnome shell extensions"
-        exit 1
+        return 1
     fi
 }
 
@@ -30,21 +30,24 @@ install_gnome_terminal() {
 
     if ! yay -S gnome-terminal-transparency --noconfirm; then
         echo "Failed to install gnome-terminal-transparency"
-        exit 1
+        return 1
     fi
-
-    confirm_proceed "Gnome Console" "remove" || return
 
     # This replaces `kgx` with `gnome-terminal` as the default
     if ! gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/gnome-terminal; then
         echo "Failed to set gnome-terminal as the default"
-        exit 1
+        return 1
     fi
+
+}
+
+remove_gnome_console() {
+    confirm_proceed "Gnome Console" "remove" || return
 
     # This removes `kgx` from the gnome environment
     if ! sudo pacman -R gnome-console --noconfirm; then
         echo "Failed to remove gnome-console"
-        exit 1
+        return 1
     fi
 }
 
@@ -52,4 +55,5 @@ install_gnome() {
     install_gnome_desktop
     install_gnome_extensions
     install_gnome_terminal
+    remove_gnome_console
 }

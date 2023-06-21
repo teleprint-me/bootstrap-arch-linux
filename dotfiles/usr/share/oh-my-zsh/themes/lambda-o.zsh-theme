@@ -13,15 +13,12 @@ function git_prompt_custom {
         return
     fi
     
-    local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     local branch_prefix=""
+    local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     
     if [[ "$(git status --porcelain 2>/dev/null)" != "" ]]; then
         # Changes detected, color branch name red
         branch_prefix="%{$fg[red]%}Δ%{$reset_color%}"
-    elif git status | grep 'renamed:' &>/dev/null; then
-        # The branch is being renamed
-        branch_prefix="%{$fg[yellow]%}ρ%{$reset_color%}"
     else
         # No changes detected, color branch name green
         branch_prefix="%{$fg[green]%}θ%{$reset_color%}"

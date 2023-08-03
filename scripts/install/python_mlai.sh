@@ -25,7 +25,7 @@ install_python_mlai_dependencies() {
     # NOTE: Do NOT use the AUR here!!! Use official packages only!!!
     # Doing otherwise will create a dependency cycle, which will lead to broken
     # builds, which will lead to a mangled system setup.
-    if ! sudo pacman -S bpython python-dotenv python-dateutil python-pytz python-iso8601 python-requests python-requests-mock pyopencl-headers python-pyopencl python-numpy python-matplotlib python-nltk python-scikit-learn python-pdfminer --noconfirm; then
+    if ! sudo pacman -S bpython python-fire python-dotenv python-dateutil python-pytz python-iso8601 python-requests python-requests-mock pyopencl-headers python-pyopencl python-numpy python-matplotlib python-nltk python-scikit-learn python-protobuf python-pdfminer --noconfirm; then
         echo "pacman: Failed to install Python OpenCL, ML, and AI libraries"
         exit 1
     fi
@@ -36,7 +36,7 @@ install_python_mlai_extensions() {
     # and transformers from a system install to a user install to prevent mangling
     # system packages.
     # Install python dependencies
-    if ! pip install --user --break-system-packages sentencepiece sentence-transformers transformers huggingface-hub InstructorEmbedding tiktoken chromadb langchain; then
+    if ! pip install --user --break-system-packages sentencepiece sentence-transformers transformers InstructorEmbedding; then
         echo "pip: Failed to install python library extensions"
         exit 1
     fi
@@ -49,7 +49,7 @@ install_python_mlai_extensions() {
 }
 
 install_python_pytorch_cpu_extensions() {
-    if ! pip install --user --break-system-packages accelerate xformers faiss-cpu; then
+    if ! pip install --user --break-system-packages accelerate xformers faiss-cpu fairscale; then
         echo "pip: Failed to install pytorch development extensions"
         exit 1
     fi
@@ -65,7 +65,7 @@ install_python_pytorch_cuda_extensions() {
 
 install_python_pytorch_rocm_extensions() {
     # Install bitsandbytes with ROCm support
-    if ! pip install --user --break-system-packages "git+https://github.com/broncotc/bitsandbytes-rocm@1b52f4243f94cd1b81dd1cad5a9465d9d7add858"; then
+    if ! pip install --user --break-system-packages "git+https://github.com/broncotc/bitsandbytes-rocm"; then
         echo "pip: Failed to install bitsandbytes-rocm package"
         exit 1
     fi

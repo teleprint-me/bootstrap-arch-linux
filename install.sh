@@ -29,6 +29,7 @@ main() {
         "${source_install}/python_poetry.sh"
         "${source_install}/chrome.sh"
         "${source_install}/steam.sh"
+        "${source_install}/spotify.sh"
         "${source_setup}/neovim.sh"
         "${source_setup}/nvm.sh"
         "${source_setup}/tmux.sh"

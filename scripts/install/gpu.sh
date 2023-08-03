@@ -5,7 +5,8 @@ source ./scripts/install/python_mlai.sh
 
 # Function to install OpenCL
 install_opencl() {
-    if ! sudo pacman -S openblas openblas64 opencl-headers libclc opencl-clhpp ocl-icd lib32-ocl-icd miopengemm clinfo clpeak nvtop --noconfirm; then
+    # NOTE: omitted miopengemm for kernel generation because it requires AUR
+    if ! sudo pacman -S openblas openblas64 opencl-headers libclc opencl-clhpp ocl-icd lib32-ocl-icd clinfo clpeak nvtop --noconfirm; then
         echo "Failed to install OpenCL"
         exit 1
     fi
@@ -52,7 +53,7 @@ install_amd_vulkan() {
 
 # Function to install AMD ROCm
 install_amd_rocm() {
-    if ! sudo pacman -S opencl-mesa lib32-opencl-mesa rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse rccl python-pytorch-rocm python-pytorch-opt-rocm --noconfirm; then
+    if ! sudo pacman -S rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse rccl python-pytorch-rocm python-pytorch-opt-rocm --noconfirm; then
         echo "Failed to install AMD ROCm"
         exit 1
     fi

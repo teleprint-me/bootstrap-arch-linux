@@ -2,7 +2,7 @@
   "singleQuote": false,
   "trailingComma": "none",
   "pluginSearchDirs": ["."],
-  "proseWrap": "always",
+  "proseWrap": "never",
   "tabWidth": 2,
   "useTabs": false,
   "bracketSpacing": true,

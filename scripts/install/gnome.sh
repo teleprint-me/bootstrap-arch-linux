@@ -10,8 +10,17 @@ source ./scripts/tools/confirm.sh
 install_gnome_desktop() {
     confirm_proceed "Gnome Desktop Environment" || return
 
-    if ! sudo pacman -S gnome-desktop --noconfirm; then
+    if ! sudo pacman -S gnome-desktop gdm --noconfirm; then
         echo "Failed to install Gnome desktop environment"
+        return 1
+    fi
+}
+
+install_gnome_applications() {
+    confirm_proceed "Gnome Applications" || return
+
+    if ! sudo pacman -S gnome-control-center gnome-keyring gnome-calendar gnome-calculator gnome-disk-utility gnome-logs gnome-power-manager gnome-screenshot gnome-weather gnome-theme-extra nautilus gthumb evince baobab --noconfirm; then
+        echo "Failed to install Gnome applications"
         return 1
     fi
 }
@@ -33,27 +42,44 @@ install_gnome_terminal() {
         return 1
     fi
 
-    # This replaces `kgx` with `gnome-terminal` as the default
     if ! gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/gnome-terminal; then
         echo "Failed to set gnome-terminal as the default"
         return 1
     fi
-
 }
 
 remove_gnome_console() {
-    confirm_proceed "Gnome Console" "remove" || return
+    # NOTE: `gnome-console` app is `/usr/bin/kgx` and is specific to EndeavourOS.
+    confirm_proceed "Remove Gnome Console (EndeavourOS)" || return
 
-    # This removes `kgx` from the gnome environment
-    if ! sudo pacman -R gnome-console --noconfirm; then
-        echo "Failed to remove gnome-console"
+    if pacman -Qq gnome-console &>/dev/null; then
+        confirm_proceed "Gnome Console" "remove" || return
+
+        if ! sudo pacman -R gnome-console --noconfirm; then
+            echo "Failed to remove gnome-console"
+            return 1
+        fi
+    else
+        echo "Gnome Console is not installed, skipping removal."
+    fi
+}
+
+enable_gnome_display_manager() {
+    confirm_proceed "Enable GDM (Gnome Display Manager)" || return
+
+    if ! sudo systemctl enable gdm.service; then
+        echo "Failed to enable GDM"
         return 1
     fi
 }
 
 install_gnome() {
     install_gnome_desktop
+    install_gnome_applications
     install_gnome_extensions
     install_gnome_terminal
     remove_gnome_console
+    # NOTE: Enabling GDM should always be last!
+    # It will launch the display manager after execution!
+    enable_gnome_display_manager
 }

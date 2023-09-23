@@ -1,5 +1,10 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=${HOME}/bin:${HOME}/.local/bin:$PATH
+# Set Environment Variables for PATH
+PATH_BIN=${HOME}/.bin
+PATH_LOCAL=${HOME}/.local/bin
+PATH_ROCM=/opt/rocm/bin
+# Export Set Environment Variables
+export PATH=${PATH_BIN}:${PATH_LOCAL}:${PATH_ROCM}:$PATH
 
 # Ignore security directive
 # NOTE: make sure to check out this issue on github
@@ -135,7 +140,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias vim='nvim'
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ${ZSH}"
 alias ll='ls -lhHF'
@@ -148,8 +152,4 @@ alias ln='ln -v'
 alias j='jump'
 alias m='mark'
 alias ms='marks'
-
-# Inject node version manager
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# alias vim='nvim'

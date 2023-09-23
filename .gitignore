@@ -4,3 +4,4 @@
 config.sh
 configure.sh
 /dotfiles/gitconfig
+/node_modules

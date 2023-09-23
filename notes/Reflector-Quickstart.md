@@ -8,11 +8,17 @@ sudo pacman -S reflector
 
 #### Backup Existing Mirrorlist
 
-Before running Reflector, it's a good practice to backup your existing mirrorlist.
+Before running Reflector, it's advisable to create a backup of your existing mirrorlist.
 
 ```bash
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ```
+
+Creating a backup serves several purposes:
+
+- It prevents accidental overwrites of your current mirrorlist.
+- It allows for easy restoration of the original mirrorlist in case of corruption or malformed entries.
+- It offers a safeguard against potential inclusion of untrustworthy or malicious sources.
 
 #### Basic Usage
 

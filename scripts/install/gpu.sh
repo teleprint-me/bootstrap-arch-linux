@@ -53,7 +53,7 @@ install_amd_vulkan() {
 
 # Function to install AMD ROCm
 install_amd_rocm() {
-    if ! sudo pacman -S rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse rccl python-pytorch-rocm python-pytorch-opt-rocm --noconfirm; then
+    if ! sudo pacman -S rocm-core rocm-llvm rocm-clang-ocl rocm-cmake rocm-smi-lib rocm-hip-libraries rocm-hip-runtime rocm-hip-sdk rocm-language-runtime rocm-opencl-runtime rocm-opencl-sdk rocm-device-libs rocm-ml-libraries rocm-ml-sdk rocminfo hipblas rocblas rocsparse rccl python-pytorch-opt-rocm --noconfirm; then
         echo "Failed to install AMD ROCm"
         exit 1
     fi

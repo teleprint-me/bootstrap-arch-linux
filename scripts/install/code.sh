@@ -69,7 +69,7 @@ reset_vscode_mime_types() {
 install_vscode() {
     confirm_proceed "Visual Studio Code" || return
 
-    if ! yay -S visual-studio-code-bin --noconfirm; then
+    if ! yay -S visual-studio-code-bin jre-openjdk-headless graphviz --noconfirm; then
         echo "Failed to install Visual Studio Code"
         return 1
     fi

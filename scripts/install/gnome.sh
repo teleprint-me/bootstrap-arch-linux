@@ -28,7 +28,7 @@ install_gnome_applications() {
 install_gnome_extensions() {
     confirm_proceed "Gnome Shell Extensions" || return
 
-    if ! yay -S gnome-shell-extensions gnome-browser-connector gnome-shell-extension-arc-menu gnome-shell-extension-appindicator gnome-shell-extension-material-shell gnome-tweaks --noconfirm; then
+    if ! yay -S xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-shell-extensions gnome-browser-connector gnome-shell-extension-arc-menu gnome-shell-extension-appindicator gnome-shell-extension-material-shell gnome-tweaks --noconfirm; then
         echo "Failed to install Gnome shell extensions"
         return 1
     fi

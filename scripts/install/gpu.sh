@@ -6,7 +6,7 @@ source ./scripts/install/python_mlai.sh
 # Function to install OpenCL
 install_opencl() {
     # NOTE: omitted miopengemm for kernel generation because it requires AUR
-    if ! sudo pacman -S openblas openblas64 opencl-headers libclc opencl-clhpp ocl-icd lib32-ocl-icd clinfo clpeak nvtop --noconfirm; then
+    if ! sudo pacman -S openblas openblas64 opencl-headers libclc opencl-clhpp ocl-icd lib32-ocl-icd clinfo clpeak nvtop clblast pocl --noconfirm; then
         echo "Failed to install OpenCL"
         exit 1
     fi
@@ -65,7 +65,6 @@ install_intel() {
     install_opencl
     install_intel_opencl
     install_intel_vulkan
-    install_python_mlai
 }
 
 install_nvidia() {
@@ -74,7 +73,6 @@ install_nvidia() {
     install_opencl
     install_nvidia_vulkan
     install_nvidia_cuda
-    install_python_mlai_cuda
 }
 
 install_amd() {
@@ -83,5 +81,4 @@ install_amd() {
     install_opencl
     install_amd_vulkan
     install_amd_rocm
-    install_python_mlai_rocm
 }

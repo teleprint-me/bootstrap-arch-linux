@@ -1,10 +1,13 @@
 # If you come from bash you might have to change your $PATH.
+
 # Set Environment Variables for PATH
-PATH_BIN=${HOME}/.bin
-PATH_LOCAL=${HOME}/.local/bin
-PATH_ROCM=/opt/rocm/bin
+#PATH_ROCM=/opt/rocm/bin # Only enable if ROCM is installed
+PATH_CARGO=${HOME}/.cargo/bin # Only enabled if using rustup
+PATH_LOCAL=${HOME}/.local/bin # Only enable if using pipx
+PATH_BIN=${HOME}/.bin         # Enable custom binaries
+
 # Export Set Environment Variables
-export PATH=${PATH_BIN}:${PATH_LOCAL}:${PATH_ROCM}:$PATH
+export PATH=${PATH_BIN}:${PATH_CARGO}:${PATH_LOCAL}:$PATH
 
 # Ignore security directive
 # NOTE: make sure to check out this issue on github
@@ -81,12 +84,12 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git 
-    jump
-    zsh-autosuggestions 
-    zsh-syntax-highlighting
-    zsh-completions
-    poetry
+  git
+  jump
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-completions
+  poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -105,6 +108,14 @@ export LANG=en_US.UTF-8
 GPG_TTY=$(tty)
 export GPG_TTY
 
+# enable gpg agent
+# REMINDERS:
+#   gpgconf --kill gpg-agent  # stop gpg-agent
+#   echo "default-cache-ttl [seconds]" >> ~/.gnupg/gpg-agent.conf
+if ! pgrep -x gpg-agent >/dev/null; then
+  eval $(gpg-agent --daemon)
+fi
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -119,8 +130,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # export ARCHFLAGS="-arch x86_64"
 
 # Use bash to call help commands
-function help () {
-    bash -c "help -m $@ | less"
+function help() {
+  bash -c "help -m $@ | less"
 }
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -132,14 +143,15 @@ function help () {
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
+# alias vim='nvim'
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ${ZSH}"
 alias ll='ls -lhHF'
@@ -152,4 +164,3 @@ alias ln='ln -v'
 alias j='jump'
 alias m='mark'
 alias ms='marks'
-# alias vim='nvim'

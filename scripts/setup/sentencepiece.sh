@@ -5,19 +5,19 @@ source ./scripts/tools/confirm.sh
 setup_sentencepiece() {
     confirm_proceed "SentencePiece" || return
 
-    # Check if yay is already installed
+    # Check if sentencepiece is already installed
     if command -v spm_train &> /dev/null; then
         echo "sentencepiece is already installed"
         return 0
     fi
 
-    # Clone the yay repository
+    # Clone the sentencepiece repository
     if ! git clone https://github.com/google/sentencepiece; then
         echo "Failed to clone sentencepiece repository"
         return 1
     fi
 
-    # Change to the yay directory
+    # Change to the sentencepiece directory
     cd sentencepiece || return 1
     mkdir build && cd build || return 1
     cmake .. || return 1

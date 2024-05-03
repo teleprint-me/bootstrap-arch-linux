@@ -5,6 +5,7 @@ source ./scripts/tools/confirm.sh
 
 SPM_TEMP_PATH="/tmp/sentencepiece"
 SPM_LIB_PATH="/usr/local/lib/sentencepiece"
+SPM_INC_PATH="/usr/local/include/sentencepiece"
 
 function git_clone_sentencepiece() {
     git clone https://github.com/google/sentencepiece "${SPM_TEMP_PATH}"
@@ -76,6 +77,14 @@ function setup_sentencepiece() {
     for binary in "${binaries[@]}"; do
         ln -s "${SPM_LIB_PATH}/${binary}" "/usr/local/bin/${binary}"
     done
+
+    # Install headers
+    cd .. || { echo "Failed to enter spm repo"; return 1; }
+    sudo mkdir "${SPM_INC_PATH}"
+    sudo cp -v \
+        src/sentencepiece_trainer.h \
+        src/sentencepiece_processor.h \
+        "${SPM_INC_PATH}"
 
     # Change back to the previous directory
     cd - || return 1

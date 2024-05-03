@@ -3,13 +3,14 @@
 source ./scripts/tools/clone.sh
 source ./scripts/tools/confirm.sh
 
-declare -r SPM_TEMP_PATH="/tmp/sentencepiece"
-declare -r SPM_LIB_PATH="/usr/local/lib/sentencepiece"
-declare -r SPM_INC_PATH="/usr/local/include/sentencepiece"
-declare -r SPM_URL="https://github.com/google/sentencepiece"
+declare -r SPM_NAME="sentencepiece"
+declare -A SPM=( ["tmp"]="/tmp/${SPM_NAME}"
+                 ["lib"]="/usr/local/lib/${SPM_NAME}"
+                 ["inc"]="/usr/local/include/${SPM_NAME}"
+                 ["url"]="https://github.com/${SPM_NAME}.git" )
 
 function git_clone_sentencepiece() {
-    git_clone_repo "${SPM_URL}" "${SPM_TEMP_PATH}"
+    git_clone_repo "${SPM['url']}" "${SPM['tmp']}"
 }
 
 function setup_sentencepiece() {
@@ -20,18 +21,18 @@ function setup_sentencepiece() {
 
     # Check if sentencepiece is already installed
     if command -v spm_train &> /dev/null; then
-        echo "sentencepiece is already installed. Skipping installation."
+        echo "${SPM_NAME} is already installed. Skipping installation."
         return 1
     else
         git_clone_sentencepiece || {
-            echo "Failed to install sentencepiece"; 
+            echo "Failed to install ${SPM_NAME}"; 
             return 1; 
         }
     fi
 
     # Change to the sentencepiece directory
     # Note that using braces `{ }` is okay here
-    if ! cd ${SPM_TEMP_PATH}; then 
+    if ! cd "${SPM['tmp']}"; then 
         return 1 
     fi
 
@@ -53,7 +54,7 @@ function setup_sentencepiece() {
         # Note that use of 'cd ... || exit' or 'cd ... || return' in case cd fails.
         ## shellcheck [SC2164](https://www.shellcheck.net/wiki/SC2164)
         cd - || return 2  # retreat to current working directory
-        rm -rf sentencepiece  # attempt to clean up on the way out
+        rm -rf "${SPM['tmp']}"  # attempt to clean up on the way out
         return 1  # Return to calling function
     fi
 
@@ -65,7 +66,7 @@ function setup_sentencepiece() {
            src/Makefile
 
     # Create the global path
-    if ! sudo mv -v src/ "${SPM_LIB_PATH}"; then
+    if ! sudo mv -v src/ "${SPM['lib']}"; then
         return 1
     fi
 
@@ -79,22 +80,22 @@ function setup_sentencepiece() {
 
     # Add the symbolic links to the binaries
     for binary in "${binaries[@]}"; do
-        ln -s "${SPM_LIB_PATH}/${binary}" "/usr/local/bin/${binary}"
+        ln -s "${SPM['lib']}/${binary}" "/usr/local/bin/${binary}"
     done
 
     # Install headers
     cd .. || { echo "Failed to enter spm repo"; return 1; }
-    sudo mkdir "${SPM_INC_PATH}"
+    sudo mkdir "${SPM['inc']}"
     sudo cp -v \
         src/sentencepiece_trainer.h \
         src/sentencepiece_processor.h \
-        "${SPM_INC_PATH}"
+        "${SPM['inc']}"
 
     # Change back to the working directory
     cd "${CWD}" || return 1
 
     # Clean up temporary files
-    rm -rf "${SPM_TEMP_PATH}"
+    rm -rf "${SPM['tmp']}"
 
     echo "SentencePiece setup completed successfully"
 }

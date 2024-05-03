@@ -3,23 +3,27 @@
 source ./scripts/tools/clone.sh
 source ./scripts/tools/confirm.sh
 
-SPM_TEMP_PATH="/tmp/sentencepiece"
-SPM_LIB_PATH="/usr/local/lib/sentencepiece"
-SPM_INC_PATH="/usr/local/include/sentencepiece"
+declare -r SPM_TEMP_PATH="/tmp/sentencepiece"
+declare -r SPM_LIB_PATH="/usr/local/lib/sentencepiece"
+declare -r SPM_INC_PATH="/usr/local/include/sentencepiece"
+declare -r SPM_URL="https://github.com/google/sentencepiece"
 
 function git_clone_sentencepiece() {
-    git clone https://github.com/google/sentencepiece "${SPM_TEMP_PATH}"
+    git_clone_repo "${SPM_URL}" "${SPM_TEMP_PATH}"
 }
 
 function setup_sentencepiece() {
     confirm_proceed "SentencePiece" || return
 
+    # Track current working directory
+    local CWD="$PWD"  # Escape hatch! We'll need this later.
+
     # Check if sentencepiece is already installed
     if command -v spm_train &> /dev/null; then
         echo "sentencepiece is already installed. Skipping installation."
         return 1
-    else  # Download and install sentencepiece
-        git_clone_sentencepiece || { 
+    else
+        git_clone_sentencepiece || {
             echo "Failed to install sentencepiece"; 
             return 1; 
         }
@@ -86,11 +90,11 @@ function setup_sentencepiece() {
         src/sentencepiece_processor.h \
         "${SPM_INC_PATH}"
 
-    # Change back to the previous directory
-    cd - || return 1
+    # Change back to the working directory
+    cd "${CWD}" || return 1
 
-    # Remove the yay directory
-    rm -rf sentencepiece
+    # Clean up temporary files
+    rm -rf "${SPM_TEMP_PATH}"
 
     echo "SentencePiece setup completed successfully"
 }
